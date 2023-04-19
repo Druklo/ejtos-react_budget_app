@@ -1,28 +1,41 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
-const Currency = () => {
-  const {dispatch } = useContext(AppContext);
+import Dropdown from 'react-bootstrap/Dropdown';
 
-    const changeCurrency = (val)=>{
-            dispatch({
-                type: 'CHG_CURRENCY',
-                payload: val,
-            })
+const CurrencyDropdown = () => {
+    const { currency, dispatch } = useContext(AppContext);
+
+    const updateCurrency = (newCurrency) => {
+        dispatch({
+            type: 'CHG_CURRENCY',
+            payload: newCurrency,
+        });
     }
-    
 
-  return (
-        <div className='alert alert-secondary'> Currency {
-      <select name="Currency" id="Currency" onChange={event=>changeCurrency(event.target.value)}>
-        <option value="$">$ Dollar</option>
-        <option value="£">£ Pound</option>
-        <option value="€">€ Euro</option>
-        <option value="₹">₹ Ruppee</option>
-      </select>	
-      }	
-    </div>
+    const currencies = [
+        { symbol: '$', name: 'Dollar' },
+        { symbol: '£', name: 'Pound' },
+        { symbol: '€', name: 'Euro' },
+        { symbol: '₹', name: 'Ruppee' },
+    ]
+
+    return (
+        <Dropdown className="d-flex justify-content-center">
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                Currency ({currency.symbol} {currency.name})
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+                {currencies.map((curr) => (
+                    <Dropdown.Item key={curr.name}
+                        onClick={() => updateCurrency(curr)}>
+                        {curr.symbol} {curr.name}
+                    </Dropdown.Item>
+                ))}
+            </Dropdown.Menu>
+        </Dropdown>
     );
 };
 
-export default Currency;
+export default CurrencyDropdown;
