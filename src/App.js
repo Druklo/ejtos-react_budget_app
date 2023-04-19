@@ -1,12 +1,15 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { AppProvider } from './context/AppContext';
+// Add code to import the components
 import Budget from './components/Budget';
 import ExpenseTotal from './components/ExpenseTotal';
 import ExpenseList from './components/ExpenseList';
 import AllocationForm from './components/AllocationForm';
 import RemainingBudget from './components/Remaining';
+import CurrencyDropdown from './components/CurrencyDropdown'
+
+import { AppProvider } from './context/AppContext';
 
 const App = () => {
     return (
@@ -14,14 +17,17 @@ const App = () => {
             <div className='container'>
                 <h1 className='mt-3'>Company's Budget Allocation</h1>
                 <div className='row mt-3'>
-                    <div className='col-sm'>
+                    <div className='col-sm m-auto'>
                         <Budget />
                     </div>
-                    <div className='col-sm'>
+                    <div className='col-sm m-auto'>
                         <RemainingBudget />
                     </div>
-                    <div className='col-sm'>
+                    <div className='col-sm m-auto'>
                         <ExpenseTotal />
+                    </div>
+                    <div className='col-sm m-auto'>
+                        <CurrencyDropdown />
                     </div>
                 </div>
                 <h3 className='mt-3'>Allocation</h3>
@@ -31,14 +37,9 @@ const App = () => {
                     </div>
                 </div>
                 <h3 className='mt-3'>Change allocation</h3>
-                <div className='row mt-3'>
-                    <div className='col-sm'>
-                        <AllocationForm/>
-                    </div>
-                </div>
+                <AllocationForm />
             </div>
         </AppProvider>
     );
 };
-
 export default App;
